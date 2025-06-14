@@ -1,0 +1,157 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "Portfolio Information API",
+      "description": "API for retrieving user portfolio information, including assets and performance metrics.",
+      "version": "1.0.0"
+    },
+    "servers": [
+      {
+        "url": "https://cheeze-book.azurewebsites.net/api"
+      }
+    ],
+    "paths": {
+      "/portfolio/{userId}": {
+        "get": {
+          "summary": "Get user portfolio information",
+          "description": "Retrieves detailed information about the user's investment portfolio.",
+          "operationId": "getPortfolioInfo",
+          "parameters": [
+            {
+              "name": "userId",
+              "in": "path",
+              "required": true,
+              "description": "The unique identifier for the user whose portfolio information is being requested.",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "startDate",
+              "in": "query",
+              "required": false,
+              "description": "The start date for the period over which to retrieve portfolio data (format: YYYY-MM-DD).",
+              "schema": {
+                "type": "string",
+                "format": "date"
+              }
+            },
+            {
+              "name": "endDate",
+              "in": "query",
+              "required": false,
+              "description": "The end date for the period over which to retrieve portfolio data (format: YYYY-MM-DD).",
+              "schema": {
+                "type": "string",
+                "format": "date"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful retrieval of portfolio information.",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Portfolio"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Invalid request parameters."
+            },
+            "401": {
+              "description": "The request lacks valid authentication credentials."
+            },
+            "403": {
+              "description": "The user is not authorized to access the requested portfolio information."
+            },
+            "404": {
+              "description": "No portfolio information found for the given userId."
+            },
+            "500": {
+              "description": "Unexpected server error."
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "Portfolio": {
+          "type": "object",
+          "properties": {
+            "userId": {
+              "type": "string"
+            },
+            "portfolioId": {
+              "type": "string"
+            },
+            "assets": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/Asset"
+              }
+            },
+            "totalValue": {
+              "type": "number",
+              "format": "double"
+            },
+            "performanceSummary": {
+              "$ref": "#/components/schemas/PerformanceSummary"
+            }
+          }
+        },
+        "Asset": {
+          "type": "object",
+          "properties": {
+            "assetId": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "quantity": {
+              "type": "integer"
+            },
+            "currentValue": {
+              "type": "number",
+              "format": "double"
+            },
+            "performance": {
+              "$ref": "#/components/schemas/Performance"
+            }
+          }
+        },
+        "Performance": {
+          "type": "object",
+          "properties": {
+            "returnPercentage": {
+              "type": "number",
+              "format": "double"
+            },
+            "riskLevel": {
+              "type": "string"
+            }
+          }
+        },
+        "PerformanceSummary": {
+          "type": "object",
+          "properties": {
+            "totalReturnPercentage": {
+              "type": "number",
+              "format": "double"
+            },
+            "riskAssessment": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+  
