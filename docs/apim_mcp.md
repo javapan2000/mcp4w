@@ -62,3 +62,4 @@ That’s it—once the build finishes propagating you can start exposing your AP
 [2]: https://learn.microsoft.com/en-us/azure/api-management/configure-service-update-settings "Configure API Management settings for service updates | Microsoft Learn"
 [3]: https://techcommunity.microsoft.com/blog/integrationsonazureblog/announcing-service-updates-for-azure-api-management/4402702?utm_source=chatgpt.com "Announcing \"Service updates\" for Azure API management | Microsoft ..."
 [4]: https://techcommunity.microsoft.com/blog/integrationsonazureblog/introducing-model-logging-import-from-ai-foundry-and-extended-model-support-in-a/4415210 "Introducing Model Logging, Import from AI Foundry, and extended model support in AI Gateway | Microsoft Community Hub"
+
